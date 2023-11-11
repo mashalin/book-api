@@ -14,7 +14,7 @@ import {
 
 import { BookService } from './book.service';
 import { CreateBookDto, PageOptionsDto, UpdateBookDto } from './dto';
-import { JwtAuthGuard } from '../user/guards';
+import { JwtAuthGuard } from '../auth/guards';
 import { IUser } from '../user/interfaces';
 
 @Controller('books')

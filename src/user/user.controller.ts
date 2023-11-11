@@ -10,7 +10,7 @@ import { Response } from 'express';
 
 import { UserService } from './user.service';
 import { RegisterDto, LoginDto } from './dto';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Controller('users')
 export class UserController {
