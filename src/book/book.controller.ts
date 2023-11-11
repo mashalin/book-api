@@ -27,8 +27,8 @@ export class BookController {
   }
 
   @Get(':id')
-  getOne(@Param() params: { id: string }) {
-    return this.bookService.findOneById(Number(params.id));
+  getOne(@Param() params: { id: number }) {
+    return this.bookService.findOneById(params.id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -40,30 +40,30 @@ export class BookController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(
-    @Param() params: { id: string },
+    @Param() params: { id: number },
     @Req() req: { user: IUser },
     @Body() dto: UpdateBookDto,
   ) {
     const hasAccess = await this.bookService.checkUserAccess(
-      Number(params.id),
+      params.id,
       req.user.id,
     );
     if (!hasAccess) {
       throw new ForbiddenException(['No access']);
     }
-    return this.bookService.update(Number(params.id), dto);
+    return this.bookService.update(params.id, dto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async delete(@Param() params: { id: string }, @Req() req: { user: IUser }) {
+  async delete(@Param() params: { id: number }, @Req() req: { user: IUser }) {
     const hasAccess = await this.bookService.checkUserAccess(
-      Number(params.id),
+      params.id,
       req.user.id,
     );
     if (!hasAccess) {
       throw new ForbiddenException(['No access']);
     }
-    return this.bookService.delete(Number(params.id));
+    return this.bookService.delete(params.id);
   }
 }
